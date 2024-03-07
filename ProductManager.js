@@ -32,13 +32,10 @@ class ProductManager {
             stock
         }
         this.products.push(newProduct)
-        // const saveFile = async () => {
-        //     await fs.promises.writeFile(fileProducts, JSON.stringify(this.products))
-        // }
+        
         const writeFile = async () => {
             fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2))
         }
-        //saveFile();
         writeFile();
     }
 
@@ -47,7 +44,7 @@ class ProductManager {
     }
     getProductbyId() {
         this.products.find((product) => product.id === id)
-        
+
         if (!product) {
             console.log("No existe un producto con ese ID")
         }
@@ -56,36 +53,36 @@ class ProductManager {
         }
     }
     async updateProduct(id) {
-        this.products.find((product) => product.id === id) {
-        fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2))
+        this.products.find((item) => item.id === id)
+        if (!item) {
+            console.log("No existe un producto con ese ID", error)
         }
-        
+        else {
+            
+            fs.writeFileSync(this.path, JSON.stringify(item, null, 2))
+        }
     }
     async deleteProduct(id) {
         this.products.find((item) => item.id === id)
-        if (item) {
-        item.remove();
-        fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2))}
-        else {console.log ("No existe un producto con ese ID")}
+        if (!item) {
+            console.log("No existe un producto con ese ID", error) 
+        }
+        else { 
+            item.remove();
+         fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2))
+        }
 
     }
 }
 
 //Testing
 const manager = new ProductManager()
-manager.addProduct ('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc123', 25)
-manager.addProduct ('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc124', 25)
-manager.updateProduct ('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc124', 24)
-manager.deleteProduct (2);
+manager.addProduct('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc123', 25)
+manager.addProduct('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc124', 25)
+manager.updateProduct('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc124', 24)
+manager.deleteProduct(2);
 
 
 
 
-//Métodos
-/*
-addProduct
-getProduct
-getProductbyId
-updateProduct
-deleteProduct */
 
