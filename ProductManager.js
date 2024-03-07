@@ -81,7 +81,6 @@ manager.addProduct('producto prueba', 'Este es un producto prueba', 200, 'sin im
 
 manager.updateProduct (2, ('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc124', 25))
 
-
 manager.deleteProduct(2);
 
 
