@@ -1,13 +1,13 @@
 
-const fs= require ("fs");
-const fileProducts= './fileProducts.json'
+const fs = require("fs");
 
+const fileProducts = './fileProducts.json'
 
 class ProductManager {
-    static id=0
+    static id = 0
     constructor() {
 
-        this.path = fileProducts; 
+        this.path = fileProducts;
         this.products = []
 
     }
@@ -33,21 +33,31 @@ class ProductManager {
             stock
         }
         this.products.push(newProduct)
+        fs.writeFileSync.JSON
+
     }
 
     getProduct() {
-         const productsArray = this.path 
+        return JSON.parse(fs.readFileSync(this.path, "utf-8"));
     }
     getProductbyId() {
         this.products.find((product) => product.id === id)
-        return 
+        if (!product) {
+            console.log("No existe un producto con ese ID")
+        }
+        else {
+            return this.products;
+        }
     }
-    updateProduct () {
+    updateProduct() {
+
+
 
     }
     deleteProduct() {
         this.products.find((item) => item.id === id);
         item.remove();
+
 
     }
 }
