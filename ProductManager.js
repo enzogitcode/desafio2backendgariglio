@@ -1,8 +1,7 @@
-
 const fs = require("fs");
 
-const fileProducts = './fileProducts.json'
 
+const fileProducts = './fileproducts.json'
 class ProductManager {
     static id = 0
     constructor() {
@@ -33,8 +32,14 @@ class ProductManager {
             stock
         }
         this.products.push(newProduct)
-        fs.writeFileSync.JSON
-
+        const saveFile = async () => {
+            await fs.promises.writeFile(fileProducts, JSON.stringify(this.products))
+        }
+        const writeFile = async () => {
+            fs.writeFileSync(this.path, JSON.stringify(this.products))
+        }
+        saveFile();
+        writeFile();
     }
 
     getProduct() {
@@ -46,21 +51,27 @@ class ProductManager {
             console.log("No existe un producto con ese ID")
         }
         else {
-            return this.products;
+            return product;
         }
     }
-    updateProduct() {
-
-
-
+    async updateProduct() {
+        this.products.find((product) => product.id === id)
+        fs.writeFile(fileProducts, newProduct)
     }
     deleteProduct() {
         this.products.find((item) => item.id === id);
         item.remove();
 
-
     }
 }
+
+//Testing
+const manager = new ProductManager()
+manager.addProduct('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc123', 25)
+manager.getProduct ();
+
+
+
 
 //Métodos
 /*
