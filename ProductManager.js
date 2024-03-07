@@ -78,6 +78,10 @@ const manager = new ProductManager()
 
 manager.addProduct('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc123', 25)
 manager.addProduct('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc124', 25)
+
+manager.updateProduct (2, ('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc124', 25))
+
+
 manager.deleteProduct(2);
 
 
