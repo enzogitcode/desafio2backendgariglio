@@ -55,14 +55,18 @@ class ProductManager {
             return fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2))
         }
     }
-    async updateProduct() {
-        this.products.find((product) => product.id === id)
-        fs.writeFile(fileProducts, newProduct)
+    async updateProduct(id) {
+        this.products.find((product) => product.id === id) {
+        fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2))
+        }
+        
     }
-    deleteProduct() {
-        this.products.find((item) => item.id === id);
+    async deleteProduct(id) {
+        this.products.find((item) => item.id === id)
+        if (item) {
         item.remove();
-        fs.writeFile(fileProducts, newProduct)
+        fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2))}
+        else {console.log ("No existe un producto con ese ID")}
 
     }
 }
@@ -72,7 +76,8 @@ const manager = new ProductManager()
 manager.addProduct ('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc123', 25)
 manager.addProduct ('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc124', 25)
 manager.updateProduct ('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc124', 24)
-manager.deleteProduct (2)
+manager.deleteProduct (2);
+
 
 
 
