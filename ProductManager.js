@@ -1,6 +1,5 @@
 const fs = require("fs");
 
-
 const fileProducts = './fileproducts.json'
 class ProductManager {
     static id = 0
@@ -63,25 +62,23 @@ class ProductManager {
         }
     }
     async deleteProduct(id) {
-        this.products.find((item) => item.id === id)
-        if (!item) {
+        this.products.find((product) => product.id === id)
+        if (!id) {
             console.log("No existe un producto con ese ID", error) 
         }
         else { 
-            item.remove();
+            product.remove();
          fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2))
         }
-
     }
 }
 
 //Testing
 const manager = new ProductManager()
+
 manager.addProduct('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc123', 25)
 manager.addProduct('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc124', 25)
-manager.updateProduct('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc124', 24)
 manager.deleteProduct(2);
-
 
 
 
