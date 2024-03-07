@@ -32,13 +32,13 @@ class ProductManager {
             stock
         }
         this.products.push(newProduct)
-        const saveFile = async () => {
-            await fs.promises.writeFile(fileProducts, JSON.stringify(this.products))
-        }
+        // const saveFile = async () => {
+        //     await fs.promises.writeFile(fileProducts, JSON.stringify(this.products))
+        // }
         const writeFile = async () => {
-            fs.writeFileSync(this.path, JSON.stringify(this.products))
+            fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2))
         }
-        saveFile();
+        //saveFile();
         writeFile();
     }
 
@@ -47,11 +47,13 @@ class ProductManager {
     }
     getProductbyId() {
         this.products.find((product) => product.id === id)
+        fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2))
+
         if (!product) {
             console.log("No existe un producto con ese ID")
         }
         else {
-            return product;
+            return error;
         }
     }
     async updateProduct() {
@@ -61,14 +63,18 @@ class ProductManager {
     deleteProduct() {
         this.products.find((item) => item.id === id);
         item.remove();
+        fs.writeFile(fileProducts, newProduct)
 
     }
 }
 
 //Testing
 const manager = new ProductManager()
-manager.addProduct('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc123', 25)
-manager.getProduct ();
+manager.addProduct ('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc123', 25)
+manager.addProduct ('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc124', 25)
+
+manager.getProductbyId(2);
+
 
 
 
