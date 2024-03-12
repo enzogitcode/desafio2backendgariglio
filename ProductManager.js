@@ -46,7 +46,7 @@ class ProductManager {
 
         if (this.products.find((product) => product.id == id)) {
             const foundedProduct = this.products.find((product) => product.id == id)
-             const writeFile = async () => {
+            const writeFile = async () => {
                 fs.writeFileSync(this.path, JSON.stringify(foundedProduct, null, 2))
             }
             writeFile();
@@ -56,23 +56,30 @@ class ProductManager {
         }
     }
     async updateProduct(id) {
-        this.products.some((item) => item.id == id)
-        if (!item) {
-            console.log("No existe un producto con ese ID", error)
+        const foundedProduct = this.products.find((product) => product.id == id)
+        if (!foundedProduct) {
+            console.log("No existe un producto con ese ID,")
         }
         else {
 
-            fs.writeFileSync(this.path, JSON.stringify(item, null, 2))
+            const updateFile = async () => {
+
+                fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2))
+            }
+            updateFile();
         }
     }
     async deleteProduct(id) {
-        this.products.find((product) => product.id == id)
-        if (!id) {
-            console.log("No existe un producto con ese ID", error)
+        const foundedProduct = this.products.find((product) => product.id == id)
+        if (!foundedProduct) {
+            console.log("No existe un producto con ese ID")
         }
         else {
-            product.remove();
-            fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2))
+           const otherProducts= this.products.filter((product) => product.id !==id) 
+            const writeFile = async () => {
+                fs.writeFileSync(this.path, JSON.stringify(otherProducts, null, 2))
+            }
+            writeFile();
         }
     }
 }
@@ -83,16 +90,4 @@ const manager = new ProductManager()
 manager.addProduct('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc123', 25)
 manager.addProduct('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc124', 25)
 manager.addProduct('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc125', 24)
-
-manager.getProductbyId (2)
-
-
-
-/* 
-manager.updateProduct (2, ('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc124', 25))
-
-manager.deleteProduct(2); */
-
-
-
 
