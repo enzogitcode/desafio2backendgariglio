@@ -57,18 +57,48 @@ class ProductManager {
     }
     async updateProduct(id) {
         const foundedProduct = this.products.find((product) => product.id == id)
-        if (!foundedProduct) {
-            console.log("No existe un producto con ese ID,")
-        }
-        else {
-
+        if (foundedProduct) {
             const updateFile = async () => {
-
+    
                 fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2))
             }
             updateFile();
         }
+        else {
+            
+            console.log("No existe un producto con ese ID,")
+        }
     }
+    async updateProduct(id,obj) { // atrapa el id del producto a modificar y el obj del producto modificado
+
+        const db = await this.getProduct()
+
+        const index = db.findIndex(product => product.id == id) // buscamos si existe el producto en el array
+
+        console.log({index})
+
+        if (index < 0) {
+
+            console.log("No existe un producto con ese ID,")
+
+        }
+
+        else {
+
+            //aqui tienes que aplicar la logica para modificar el producto tal cual
+
+            obj.id=id; // le agregamos el id
+
+            db[index] = obj // reemplazamos el obj en el array
+
+            this.products = db // db ahora sera nuestro array asi que modificamos "this.products" de nuevo
+
+            fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2))//sobreescribimos el archivo con el nuevo array
+
+        }
+
+    }
+
     async deleteProduct(id) {
         const foundedProduct = this.products.find((product) => product.id == id)
         if (!foundedProduct) {
@@ -87,7 +117,30 @@ class ProductManager {
 //Testing
 const manager = new ProductManager()
 
-manager.addProduct('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc123', 25)
-manager.addProduct('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc124', 25)
-manager.addProduct('producto prueba', 'Este es un producto prueba', 200, 'sin imagen', 'abc125', 24)
+manager.addProduct('Cable Vga', 'Cable Vga 20 Metros Blindado Macho Doble Filtro Cobre 100', 23759, 'sin imagen', 'abc123', 25)
+manager.addProduct('Cable usb', 'Este es un producto prueba', 200, 'sin imagen', 'abc124', 25)
+manager.addProduct('Cable usb', 'Este es un producto prueba', 200, 'sin imagen', 'abc125', 25)
+manager.addProduct('Cable usb', 'Este es un producto prueba', 200, 'sin imagen', 'abc126', 25)
+manager.addProduct('Cable usb', 'Este es un producto prueba', 200, 'sin imagen', 'abc127', 25)
+manager.addProduct('Cable usb', 'Este es un producto prueba', 200, 'sin imagen', 'abc128', 25)
+manager.addProduct('Cable usb', 'Este es un producto prueba', 200, 'sin imagen', 'abc129', 25)
+manager.addProduct('Cable usb', 'Este es un producto prueba', 200, 'sin imagen', 'abc130', 25)
+manager.addProduct('Cable usb', 'Este es un producto prueba', 200, 'sin imagen', 'abc131', 25)
+manager.addProduct('Cable usb', 'Este es un producto prueba', 200, 'sin imagen', 'abc132', 25)
+manager.addProduct('Cable usb', 'Este es un producto prueba', 200, 'sin imagen', 'abc133', 25)
 
+manager.updateProduct(3,{
+
+    title: 'ACTUALIZACION',
+
+    description: 'ACTUALIZACION',
+
+    price: 200,
+
+    thumbnail: 'sin imagen',
+
+    code: 'ACTUALIZACION125',
+
+    stock: 24
+
+})
